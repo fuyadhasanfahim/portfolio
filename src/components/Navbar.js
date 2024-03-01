@@ -5,7 +5,7 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="mx-10 my-4 select-none">
+        <div className="my-4 select-none">
             <nav className="w-full max-w-7xl mx-auto relative">
                 <div className="flex justify-between items-center text-2xl font-medium">
                     <div>

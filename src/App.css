@@ -8,4 +8,6 @@ body {
     background-color: #212121;
     color: #f5deb3;
     scroll-behavior: smooth;
+    margin-left: 40px;
+    margin-right: 40px;
 }
