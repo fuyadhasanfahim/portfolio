@@ -2,8 +2,8 @@ import React from "react";
 
 export default function About() {
     return (
-        <div className="mt-10 max-w-7xl mx-auto h-auto border-b-2 border-[#f5deb3]">
-            <div className="grid grid-cols-1 md:grid-cols-2 justify-between items-start mb-16">
+        <div className="mt-10 max-w-7xl mx-auto h-auto border-b-2 border-[#f5deb3] pb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 justify-between items-start">
                 <div className="text-2xl font-medium mb-6 md:mt-0">
                     <h1>About</h1>
                 </div>
