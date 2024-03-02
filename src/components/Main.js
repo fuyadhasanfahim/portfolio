@@ -19,7 +19,7 @@ export default function Main() {
                     </button>
                 </div>
             </div>
-            <div className="mb-20">
+            <div className="mb-16 mt-6">
                 <img
                     src="https://assets-global.website-files.com/65d69dfef5be899484c226e8/65d6ac27452161caa8b03266_Marisol%20Header.png"
                     alt="https://assets-global.website-files.com/65d69dfef5be899484c226e8/65d6ac27452161caa8b03266_Marisol%20Header.png"
