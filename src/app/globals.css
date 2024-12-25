@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section {
+  @apply py-24 md:py-32 lg:py-40;
+}
