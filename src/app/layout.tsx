@@ -10,8 +10,9 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Minimal Single Page Portfolio",
-  description: "Created with Frontend Tribe",
+  title: "Fuyad Hasan Fahim | Portfolio",
+  description:
+    "Explore the portfolio of Fuyad Hasan Fahim, showcasing a diverse range of projects and skills in web development, design, and technology. Discover innovative solutions and creative works that highlight expertise and passion in the field.",
 };
 
 export default function RootLayout({

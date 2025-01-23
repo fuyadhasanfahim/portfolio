@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply scroll-smooth;
+}
+
 .section {
   @apply py-24 md:py-32 lg:py-40;
+}
+
+.line {
+  @apply overflow-hidden;
+}
+
+.word {
+  @apply translate-y-full;
 }
