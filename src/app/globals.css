@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/* ============================================================
+   NEBULA — design tokens
+   ============================================================ */
+:root {
+  --bg: #0a0b0d; /* near-black */
+  --bg-2: #101216; /* raised surface */
+  --ink: #f2f4f3; /* primary text */
+  --muted: #8b9199; /* secondary text */
+  --line: rgba(255, 255, 255, 0.08);
+
+  --acc: #a3e635; /* refined lime */
+  --acc-glow: rgba(163, 230, 53, 0.45);
+  --acc-deep: #65a30d; /* darker lime for gradients */
+
+  --violet: #7c3aed;
+  --teal: #0d9488;
+
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-brd: rgba(255, 255, 255, 0.1);
+
+  --section: clamp(60px, 7vw, 100px);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-acc: var(--acc);
+  --color-acc-deep: var(--acc-deep);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  background: var(--bg);
+  color-scheme: dark;
+}
+
+body {
+  /* No opaque background here — the dark base lives on <html> so that the
+     `-z-10` aurora/orb layers paint above it instead of being covered by an
+     in-flow body background. */
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--acc);
+  color: #0a0b0d;
+}
+
+/* Thin custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #20242b;
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2c313a;
+}
+
+/* ============================================================
+   Utility classes
+   ============================================================ */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+  .font-serif-accent {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+  }
+
+  .text-acc {
+    color: var(--acc);
+  }
+
+  /* Outline / stroked serif headline word */
+  .serif-outline {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--ink);
+  }
+  .serif-outline-acc {
+    -webkit-text-stroke: 1px var(--acc);
+  }
+
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-brd);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* Heavier frosted glass for the nav and feature panels */
+  .glass-strong {
+    background: rgba(15, 17, 20, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 8px 40px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .glow-acc {
+    box-shadow: 0 0 0 1px var(--acc), 0 0 40px -8px var(--acc-glow);
+  }
+
+  /* Subtly raised surface to break up flat black between sections */
+  .surface {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.015),
+      transparent 40%
+    );
+  }
+
+  /* Kicker — small-caps label with a leading lime dash */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kicker::before {
+    content: "";
+    width: 1.6rem;
+    height: 1px;
+    background: var(--acc);
+    box-shadow: 0 0 8px var(--acc-glow);
+  }
+
+  /* Animated underline that grows from the left on hover */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: var(--acc);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  .section-pad {
+    padding-top: var(--section);
+    padding-bottom: var(--section);
+  }
+}
+
+/* ============================================================
+   Keyframes (gated by prefers-reduced-motion below)
+   ============================================================ */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes aurora-shift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.08);
+  }
+}
+
+.twinkle {
+  animation: twinkle var(--dur, 4s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Binary loader: seamless matrix-style code-rain.
+   Strip content is doubled in markup, so -50% → 0% loops without a seam. */
+@keyframes bin-rain {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
