@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Post } from "@/lib/data";
+import { formatPostDate, type Post } from "@/lib/data";
 
 /**
  * Numbered editorial blog row. Lime index, title shifts + turns lime on hover.
@@ -31,9 +31,11 @@ export default function BlogRow({
 
       <div className="hidden shrink-0 flex-col items-end gap-1 text-right sm:flex">
         <span className="text-xs uppercase tracking-[0.16em] text-muted">
-          {post.tag}
+          {post.category}
         </span>
-        <span className="text-xs text-muted/70">{post.date}</span>
+        <span className="text-xs text-muted/70">
+          {formatPostDate(post.publishedAt)}
+        </span>
       </div>
 
       <span className="shrink-0 text-acc opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import PageIntro from "@/components/PageIntro";
-import BlogRow from "@/components/BlogRow";
+import BlogListing from "@/components/BlogListing";
 import ContactCTA from "@/components/ContactCTA";
-import { posts } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -16,16 +15,10 @@ export default function BlogPage() {
         kicker="The blog"
         lead="Notes on"
         accent="building."
-        description="Field notes from shipping real systems — AI handoff, infrastructure, and the decisions in between."
+        description="Field notes from shipping real systems: AI handoff, infrastructure, and the decisions in between."
       />
 
-      <section className="section-pad">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          {posts.map((post, i) => (
-            <BlogRow key={post.slug} post={post} index={i} />
-          ))}
-        </div>
-      </section>
+      <BlogListing page={1} />
 
       <ContactCTA />
     </>

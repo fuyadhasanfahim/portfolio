@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import AuroraBg from "@/components/AuroraBg";
 import ContactCTA from "@/components/ContactCTA";
 import Reveal from "@/components/motion/Reveal";
-import { posts } from "@/lib/data";
+import Markdown from "@/components/Markdown";
+import { formatPostDate, posts } from "@/lib/data";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -41,11 +42,11 @@ export default async function BlogPostPage({
           </Reveal>
           <Reveal delay={0.06}>
             <div className="mt-8 flex items-center gap-4 text-xs uppercase tracking-[0.16em] text-muted">
-              <span className="text-acc">{post.tag}</span>
+              <span className="text-acc">{post.category}</span>
               <span>·</span>
-              <span>{post.date}</span>
+              <span>{formatPostDate(post.publishedAt)}</span>
               <span>·</span>
-              <span>{post.readingTime}</span>
+              <span>{post.readMinutes} min read</span>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -62,13 +63,24 @@ export default async function BlogPostPage({
             {post.excerpt}
           </p>
         </Reveal>
-        <div className="mt-10 space-y-6">
-          {post.body.map((para, i) => (
-            <Reveal key={i} delay={0.02}>
-              <p className="text-base leading-[1.8] text-muted">{para}</p>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal>
+          <div className="mt-10">
+            <Markdown content={post.content} />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-12 flex flex-wrap gap-2">
+            {post.tags.map((tag) => (
+              <span
+                key={tag}
+                className="glass rounded-full border-glass-brd px-3 py-1 text-xs text-muted"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </Reveal>
 
         <div className="mt-14 border-t border-line pt-8">
           <Link
