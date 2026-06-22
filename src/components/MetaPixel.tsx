@@ -3,7 +3,11 @@
 import Script from 'next/script';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { pageview } from '@/lib/fpixel';
+import { FB_PIXEL_ID, pageview } from '@/lib/fpixel';
+
+if (!FB_PIXEL_ID) {
+    console.warn('[MetaPixel] missing pixel id');
+}
 
 /**
  * Loads the Meta (Facebook) Pixel once via next/script (afterInteractive) and
@@ -38,7 +42,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '${process.env.META_PIXEL_ID!}');
+fbq('init', '${FB_PIXEL_ID}');
 fbq('track', 'PageView');`,
                 }}
             />
@@ -48,7 +52,7 @@ fbq('track', 'PageView');`,
                     height="1"
                     width="1"
                     style={{ display: 'none' }}
-                    src={`https://www.facebook.com/tr?id=${process.env.META_PIXEL_ID!}&ev=PageView&noscript=1`}
+                    src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
                     alt=""
                 />
             </noscript>
