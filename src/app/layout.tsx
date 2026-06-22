@@ -9,6 +9,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import SiteBackground from "@/components/SiteBackground";
 import ScrollToTop from "@/components/ScrollToTop";
 import PageTransition from "@/components/PageTransition";
+import MetaPixel from "@/components/MetaPixel";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
       className={`${inter.variable} ${display.variable} ${serif.variable}`}
     >
       <body className="min-h-screen antialiased">
+        <MetaPixel />
         <SmoothScroll />
         <ScrollToTop />
         <PageTransition />

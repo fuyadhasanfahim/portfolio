@@ -16,7 +16,7 @@ export default function InquiryEmail({
 }: Props) {
   return (
     <EmailShell preview={`New project inquiry from ${name} (${projectType})`}>
-      <Section style={{ padding: "20px 32px 4px" }}>
+      <Section style={{ padding: "24px 36px 4px" }}>
         <Text
           style={{
             margin: 0,
@@ -42,7 +42,7 @@ export default function InquiryEmail({
         </Heading>
       </Section>
 
-      <Section style={{ padding: "20px 32px 8px" }}>
+      <Section style={{ padding: "20px 36px 8px" }}>
         <Field label="Name" value={name} />
         <Field label="Email" value={email} isEmail />
         <Field label="Project type" value={projectType} />

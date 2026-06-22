@@ -1,7 +1,7 @@
-import { Heading, Section, Text } from "@react-email/components";
+import { Button, Heading, Section, Text } from "@react-email/components";
 import * as React from "react";
 import { EmailShell } from "./EmailShell";
-import { brand } from "./theme";
+import { brand, site } from "./theme";
 
 /** Warm auto-reply sent to the person who submitted the form. */
 export default function ConfirmationEmail({
@@ -15,7 +15,7 @@ export default function ConfirmationEmail({
 
   return (
     <EmailShell preview="Thanks for reaching out. Your message is with me.">
-      <Section style={{ padding: "20px 32px 4px" }}>
+      <Section style={{ padding: "24px 36px 4px" }}>
         <Heading
           style={{
             margin: 0,
@@ -30,7 +30,7 @@ export default function ConfirmationEmail({
         </Heading>
       </Section>
 
-      <Section style={{ padding: "16px 32px 8px" }}>
+      <Section style={{ padding: "16px 36px 8px" }}>
         <Text
           style={{
             margin: "0 0 16px",
@@ -55,9 +55,28 @@ export default function ConfirmationEmail({
           this email and it will reach me.
         </Text>
 
+        {/* Subtle, on-brand CTA into the portfolio */}
+        <Section style={{ margin: "8px 0 4px" }}>
+          <Button
+            href={site.projects}
+            style={{
+              display: "inline-block",
+              backgroundColor: brand.acc,
+              color: "#0a0b0d",
+              fontSize: "14px",
+              fontWeight: 600,
+              padding: "11px 20px",
+              borderRadius: "10px",
+              textDecoration: "none",
+            }}
+          >
+            View my work →
+          </Button>
+        </Section>
+
         <div
           style={{
-            margin: "20px 0 4px",
+            margin: "24px 0 4px",
             paddingLeft: "16px",
             borderLeft: `3px solid ${brand.acc}`,
           }}
@@ -67,7 +86,7 @@ export default function ConfirmationEmail({
               margin: 0,
               fontSize: "15px",
               lineHeight: "22px",
-              color: brand.ink,
+              color: brand.muted,
             }}
           >
             Talk soon,

@@ -1,20 +1,25 @@
 import {
   Body,
+  Column,
   Container,
   Head,
   Hr,
   Html,
+  Link,
   Preview,
+  Row,
   Section,
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import { brand } from "./theme";
+import { brand, site, socials } from "./theme";
 
 /**
  * Shared dark, on-brand wrapper for every transactional email: deep-dark
- * background, the "Fuyad Hasan Fahim" wordmark, and a quiet footer. Both the
- * inquiry and the confirmation email render their content inside this shell.
+ * background, the "Fuyad Hasan Fahim" wordmark, and a full signature footer.
+ * Both the inquiry and the confirmation email render their content inside this
+ * shell. Layout is table-based (Row/Column) so Gmail — which strips flexbox and
+ * most CSS — renders it consistently in both light and dark themes.
  */
 export function EmailShell({
   preview,
@@ -31,7 +36,7 @@ export function EmailShell({
         style={{
           backgroundColor: brand.bg,
           margin: 0,
-          padding: "32px 0",
+          padding: "40px 0",
           fontFamily: brand.fontSans,
         }}
       >
@@ -46,12 +51,12 @@ export function EmailShell({
             overflow: "hidden",
           }}
         >
-          {/* Header / wordmark */}
-          <Section style={{ padding: "28px 32px 0" }}>
+          {/* Header / wordmark — generous top breathing room */}
+          <Section style={{ padding: "40px 36px 0" }}>
             <Text
               style={{
                 margin: 0,
-                fontSize: "18px",
+                fontSize: "22px",
                 fontWeight: 700,
                 letterSpacing: "-0.02em",
                 color: brand.ink,
@@ -62,9 +67,9 @@ export function EmailShell({
             </Text>
             <div
               style={{
-                height: "2px",
-                width: "40px",
-                marginTop: "12px",
+                height: "3px",
+                width: "52px",
+                marginTop: "14px",
                 backgroundColor: brand.acc,
                 borderRadius: "2px",
               }}
@@ -73,17 +78,73 @@ export function EmailShell({
 
           {children}
 
-          <Hr style={{ borderColor: brand.border, margin: "8px 32px" }} />
-          <Section style={{ padding: "8px 32px 28px" }}>
+          {/* Footer / signature */}
+          <Hr
+            style={{
+              borderColor: brand.border,
+              borderTop: `1px solid ${brand.border}`,
+              margin: "12px 36px 0",
+              width: "auto",
+            }}
+          />
+          <Section style={{ padding: "22px 36px 36px" }}>
             <Text
               style={{
-                margin: 0,
+                margin: "0 0 10px",
+                fontSize: "13px",
+                fontWeight: 600,
+                color: brand.ink,
+              }}
+            >
+              Fuyad Hasan Fahim
+              <span style={{ color: brand.acc }}>.</span>
+            </Text>
+            <Text
+              style={{
+                margin: "0 0 14px",
                 fontSize: "12px",
                 lineHeight: "18px",
                 color: brand.muted,
               }}
             >
               Full Stack Developer · AI Integration · Internal Tools
+            </Text>
+
+            {/* Social links — small, tasteful text links */}
+            <Row>
+              {socials.map((s, i) => (
+                <Column key={s.label} style={{ width: "auto" }}>
+                  <Link
+                    href={s.href}
+                    style={{
+                      fontSize: "12px",
+                      color: brand.ink,
+                      textDecoration: "none",
+                      paddingRight: i < socials.length - 1 ? "14px" : 0,
+                    }}
+                  >
+                    {s.label}
+                  </Link>
+                </Column>
+              ))}
+            </Row>
+
+            <Text
+              style={{
+                margin: "16px 0 0",
+                fontSize: "12px",
+                lineHeight: "18px",
+                color: brand.muted,
+              }}
+            >
+              <Link
+                href={site.url}
+                style={{ color: brand.acc, textDecoration: "none" }}
+              >
+                {site.domain}
+              </Link>
+              <span style={{ color: brand.border }}> · </span>
+              {site.location}
             </Text>
           </Section>
         </Container>

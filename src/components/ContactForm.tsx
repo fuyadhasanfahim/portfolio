@@ -21,6 +21,7 @@ import {
   type ContactInput,
 } from "@/lib/contact-schema";
 import { submitContact } from "@/app/contact/actions";
+import { track } from "@/lib/fpixel";
 
 // Falls back to Cloudflare's always-passes test key so the widget renders in
 // local dev; production uses the real NEXT_PUBLIC_TURNSTILE_SITE_KEY.
@@ -52,6 +53,7 @@ export default function ContactForm() {
     setServerDetail("");
     const res = await submitContact(values);
     if (res.ok) {
+      track("Lead"); // Meta Pixel conversion (guarded, no-op if pixel absent)
       setStatus("success");
       return;
     }
