@@ -41,10 +41,10 @@ export default function ContactPage() {
       />
 
       <section className="section-pad">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 sm:px-8 lg:grid-cols-[1fr_1.1fr]">
+        <div className="mx-auto grid max-w-6xl items-stretch gap-8 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
           {/* glowing info panel */}
           <Reveal>
-            <div className="glass-strong relative h-full overflow-hidden rounded-[1.75rem] p-8 shadow-[0_0_60px_-30px_var(--acc-glow)]">
+            <div className="glass-strong relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-8 shadow-[0_0_60px_-30px_var(--acc-glow)]">
               <div className="pointer-events-none absolute inset-0 -z-10">
                 <GlowOrb
                   color="violet"
@@ -74,26 +74,30 @@ export default function ContactPage() {
                 the address below.
               </p>
 
-              <dl className="mt-9 space-y-5">
-                <InfoRow icon={IconMail} label="Email">
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="link-underline text-acc"
-                  >
-                    {profile.email}
-                  </a>
-                </InfoRow>
-                <InfoRow icon={IconMapPin} label="Location">
-                  <span className="text-ink">{profile.location}</span>
-                </InfoRow>
-                <InfoRow icon={IconClock} label="Availability">
-                  <span className="text-ink">
-                    Open to freelance and full-time
-                  </span>
-                </InfoRow>
-              </dl>
+              {/* Grows to fill the card so the info sits centered between the
+                  header and the socials instead of leaving a tall bottom gap. */}
+              <div className="flex flex-1 items-center">
+                <dl className="w-full space-y-6 py-8">
+                  <InfoRow icon={IconMail} label="Email">
+                    <a
+                      href={`mailto:${profile.email}`}
+                      className="link-underline text-acc"
+                    >
+                      {profile.email}
+                    </a>
+                  </InfoRow>
+                  <InfoRow icon={IconMapPin} label="Location">
+                    <span className="text-ink">{profile.location}</span>
+                  </InfoRow>
+                  <InfoRow icon={IconClock} label="Availability">
+                    <span className="text-ink">
+                      Open to freelance and full-time
+                    </span>
+                  </InfoRow>
+                </dl>
+              </div>
 
-              <div className="mt-9 border-t border-line pt-7">
+              <div className="mt-auto border-t border-line pt-7">
                 <span className="text-xs uppercase tracking-[0.18em] text-muted/70">
                   Elsewhere
                 </span>

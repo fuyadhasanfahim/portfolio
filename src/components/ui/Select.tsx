@@ -176,7 +176,17 @@ export default function Select({
             animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6, scale: 0.98 }}
             transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="glass-strong absolute z-50 mt-2 max-h-64 w-full overflow-auto rounded-xl border border-glass-brd p-1.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.7)]"
+            // Fully OPAQUE surface so page content never bleeds through the open
+            // menu. backdrop-filter sits on top of the solid fill for polish.
+            style={{
+              background: "rgba(16, 18, 22, 0.98)",
+              backdropFilter: "blur(20px) saturate(160%)",
+              WebkitBackdropFilter: "blur(20px) saturate(160%)",
+              border: "1px solid rgba(255, 255, 255, 0.10)",
+              boxShadow:
+                "0 24px 60px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.06)",
+            }}
+            className="absolute z-[60] mt-2 max-h-64 w-full overflow-auto rounded-xl p-1.5"
           >
             {options.map((opt, i) => {
               const selected = opt === value;

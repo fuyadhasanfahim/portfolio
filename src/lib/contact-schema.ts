@@ -46,4 +46,10 @@ export type ContactInput = z.infer<typeof contactSchema>;
 /** The shape returned by the contact server action. */
 export type ContactResult =
   | { ok: true }
-  | { ok: false; error: string; code?: "rate_limit" | "captcha" | "validation" | "server" };
+  | {
+      ok: false;
+      error: string;
+      code?: "rate_limit" | "captcha" | "validation" | "config" | "server";
+      /** Verbose reason, only populated in development to aid debugging. */
+      detail?: string;
+    };

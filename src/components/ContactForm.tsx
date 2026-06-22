@@ -31,6 +31,7 @@ export default function ContactForm() {
   const reduce = useReducedMotion();
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [serverError, setServerError] = useState("");
+  const [serverDetail, setServerDetail] = useState("");
   const [turnstileKey, setTurnstileKey] = useState(0);
 
   const {
@@ -48,6 +49,7 @@ export default function ContactForm() {
 
   async function onValid(values: ContactInput) {
     setServerError("");
+    setServerDetail("");
     const res = await submitContact(values);
     if (res.ok) {
       setStatus("success");
@@ -58,6 +60,12 @@ export default function ContactForm() {
       setTurnstileKey((k) => k + 1); // force a fresh challenge
     }
     setServerError(res.error);
+    // `detail` is only sent in development; surface it so the exact failing
+    // piece (Resend / Turnstile / rate limit / config) is visible.
+    if (res.detail) {
+      setServerDetail(res.detail);
+      console.error("[contact] submit failed:", res.detail);
+    }
     setStatus("error");
   }
 
@@ -65,6 +73,7 @@ export default function ContactForm() {
     reset();
     setStatus("idle");
     setServerError("");
+    setServerDetail("");
     setTurnstileKey((k) => k + 1);
   }
 
@@ -196,7 +205,14 @@ export default function ContactForm() {
             className="mt-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200"
           >
             <IconAlertTriangle size={18} className="mt-0.5 shrink-0" />
-            <span>{serverError}</span>
+            <div className="space-y-1">
+              <span>{serverError}</span>
+              {serverDetail && (
+                <p className="font-mono text-[11px] leading-relaxed text-red-300/80">
+                  dev: {serverDetail}
+                </p>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
