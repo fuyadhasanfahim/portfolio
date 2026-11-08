@@ -21,6 +21,7 @@ import {
     type ContactInput,
 } from "@/lib/contact-schema";
 import { submitContact } from "@/app/contact/actions";
+import { pushEvent } from "@/lib/gtm";
 
 // Falls back to Cloudflare's always-passes test key so the widget renders in
 // local dev; production uses the real NEXT_PUBLIC_TURNSTILE_SITE_KEY.
@@ -52,6 +53,7 @@ export default function ContactForm() {
         setServerDetail("");
         const res = await submitContact(values);
         if (res.ok) {
+            pushEvent("lead_form_success"); // GTM Custom Event trigger → Lead
             setStatus("success");
             return;
         }
