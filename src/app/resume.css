@@ -1,0 +1,79 @@
+@font-face { font-family: "CV Geist"; src: url("/resume/geist-latin.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "CV Mono"; src: url("/resume/geist-mono-latin.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+html:has(.cv) { color-scheme: light; background: #f2f0ea; scroll-behavior: smooth; }
+.cv {
+  --paper: #f2f0ea;
+  --ink: #191b1c;
+  --soft: #575950;
+  --rule: #cccac1;
+  --link: #214cc8;
+  --mono: "CV Mono", monospace;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.03rem/1.65 "CV Geist", sans-serif;
+  min-height: 100vh;
+}
+.cv ::selection { background: #d3ddff; color: var(--ink); }
+.cv a, .cv button { touch-action: manipulation; }
+.cv :focus-visible { outline: 2px solid var(--link); outline-offset: 4px; }
+.paper { width: min(100% - 3rem, 53rem); margin-inline: auto; }
+.mast, .cv footer { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem 1.25rem; padding-block: 1.35rem; }
+.mast { border-bottom: 1px solid var(--ink); }
+.mast a { font-size: 1.12rem; font-weight: 620; letter-spacing: -.035em; line-height: 1.3; }
+.role, .work-link, .address { color: var(--link); }
+.place, .stack, .cv small, .cv footer, .market-title { font: 400 .82rem/1.6 var(--mono); color: var(--soft); }
+.identity { display:flex; gap: 1.4rem; align-items:center; margin: 3.8rem 0 1.35rem; }
+.cv .headshot { width: 6rem; height: 6rem; object-fit: cover; border-radius: 50%; flex:none; outline: 1px solid #889dcf; outline-offset: 4px; }
+.cv h1 { font-size: clamp(2.05rem, 5.1vw, 3.3rem); font-weight: 590; letter-spacing: -.065em; line-height: 1.06; margin: 0 0 .3rem; }
+.role { font-weight: 550; font-size: 1.15rem; }
+.intro { max-width: 39rem; }
+.intro > p { font-size: 1.16rem; line-height: 1.52; letter-spacing: -.018em; }
+.actions, .socials, .markets { display:flex; align-items:center; flex-wrap: wrap; }
+.contact-socials { display:flex; align-items:center; flex-wrap:wrap; gap:.35rem .95rem; margin:.3rem 0 1.35rem; }
+.contact-socials a { display:inline-flex; align-items:center; gap:.42rem; font-size:.93rem; padding-block:.3rem; }
+.contact-socials a:hover { color:var(--link); }
+.actions { gap: 1.3rem; margin: 1.2rem 0 1.65rem; font-size: .93rem; font-weight: 530; }
+.email { display:inline-flex; align-items:center; gap:.55rem; padding:.45rem .9rem; border-radius:.4rem; background:var(--link); color:white; }
+.work-link, .address { text-decoration: underline; text-underline-offset: .23em; }
+.socials { gap: .25rem; margin: 1rem 0 2.3rem -.5rem; }
+.socials a { padding:.55rem; border-radius:.35rem; }
+.cv a:hover { color: var(--link); }
+.cv .email:hover { background:#163ba3; color:white; }
+.socials a:hover, .markets a:hover { background:#e4e6e3; }
+.index { position: sticky; z-index:2; top:0; display:flex; gap:1.65rem; border-block:1px solid var(--rule); background:var(--paper); }
+.index a { position:relative; padding:.85rem 0; font-size:.9rem; }
+.indicator { position:absolute; inset:auto 0 -1px; height:2px; background:var(--link); }
+.sheet-row { display:grid; grid-template-columns: minmax(7rem, .32fr) 1fr; gap:2.3rem; padding:2.2rem 0; scroll-margin-top:3.2rem; border-bottom:1px solid var(--rule); }
+.cv h2 { font-size:1.14rem; font-weight:620; letter-spacing:-.035em; line-height:1.55; }
+.stack { margin-top:.8rem; }
+.entries { display:grid; gap:1.4rem; }
+.cv h3 { font-size:1.11rem; font-weight:590; letter-spacing:-.025em; }
+.cv small { display:block; }
+.entries p, .summary { color:var(--soft); }
+.studies article + article { border-top:1px solid var(--rule); margin-top:1rem; padding-top:1rem; }
+.studies button { display:flex; align-items:center; justify-content:space-between; gap:1rem; text-align:left; width:100%; cursor:pointer; }
+.studies button strong { display:block; font-size:1.18rem; font-weight:590; }
+.studies button:hover strong { color:var(--link); }
+.studio-link { display: inline-block; color: var(--link); margin-top: .45rem; text-decoration: underline; text-underline-offset: .2em; font-size: .93rem; }
+.summary { display:block; font-size:1rem; font-weight:400; letter-spacing:0; }
+.toggle { flex:none; border:1px solid var(--rule); padding:.35rem; border-radius:50%; }
+.disclosure { overflow:hidden; }
+.disclosure dl { border-left:2px solid #b9c5ec; padding-left:1rem; margin:1rem 0 .3rem; }
+.disclosure dl div + div { margin-top:.8rem; }
+.disclosure dt { font:500 .82rem/1.6 var(--mono); color: var(--link); }
+.disclosure dd { font-size:1rem; }
+.address { display:inline-block; margin:.3rem 0 1.3rem; overflow-wrap:anywhere; }
+.markets { gap:.35rem 1rem; margin-top:.35rem; }
+.markets a { display:inline-flex; align-items:center; gap:.45rem; font-size:.94rem; padding-block:.3rem; }
+.markets img { width:20px; height:20px; object-fit:contain; }
+@media (max-width:600px) {
+  .paper { width:calc(100% - 2.5rem); }
+  .identity { margin-top:2.5rem; gap:.9rem; }
+  .cv .headshot { width:4.6rem; height:4.6rem; }
+  .sheet-row { grid-template-columns:1fr; gap:.85rem; padding:1.6rem 0; }
+  .index { justify-content:space-between; gap:.25rem; }
+  .cv footer { align-items:flex-start; flex-direction:column; gap:.2rem; }
+  .cv footer span { max-width:100%; }
+}
+@media (prefers-reduced-motion:reduce) { html:has(.cv) { scroll-behavior:auto; } }
